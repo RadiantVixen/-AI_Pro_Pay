@@ -1,0 +1,31 @@
+version: '3.3'
+
+services:
+  postgres:
+    image: postgres:14
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - postgres
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONUSERBASE=/tmp/pip
+      - PIP_USER=0
+
+volumes:
+  pgdata:

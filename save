@@ -1,0 +1,9 @@
+https://controller.access.network/103/portal/
+
+{
+  "username": "testuser",
+  "password": "securepassword",
+  "email": "testuser@example.com",
+  "language": "en",
+  "avatar": "https://example.com/avatar.png"
+}
