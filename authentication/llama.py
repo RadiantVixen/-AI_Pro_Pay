@@ -3,9 +3,19 @@ from llama_cpp import Llama
 from django.conf import settings
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from langchain.vectorstores import Chroma
+from langchain_community.vectorstores import Chroma
 
-llm = Llama(model_path="path/to/llama-2-7b.Q4_K_M.gguf")
+
+import os
+from llama_cpp import Llama
+
+
+model_pathu = os.getenv("LLAMA_MODEL_PATH")
+llm = Llama(model_path = model_pathu)
+
+
+# llm = Llama(model_path="path/to/llama-2/llama-model.gguf")
+# llm = Llama(model_path="path/to/llama-2-7b.Q4_K_M.gguf")
 db = Chroma(persist_directory="db")  # Stores document embeddings
 
 def extract_text(pdf_file):

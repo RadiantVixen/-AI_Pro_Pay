@@ -1,5 +1,3 @@
-version: '3.3'
-
 services:
   postgres:
     image: postgres:14
@@ -13,9 +11,7 @@ services:
       POSTGRES_DB: mydb
 
   web:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     ports:
       - "8000:8000"
     volumes:
@@ -26,6 +22,19 @@ services:
       - PYTHONUNBUFFERED=1
       - PYTHONUSERBASE=/tmp/pip
       - PIP_USER=0
+
+  react:
+    build:
+      context: ./React
+      dockerfile: Dockerfile
+    volumes:
+      - ./React:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - web
+    environment:
+      - CHOKIDAR_USEPOLLING=true
 
 volumes:
   pgdata:

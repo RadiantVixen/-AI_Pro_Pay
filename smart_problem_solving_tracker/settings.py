@@ -160,3 +160,7 @@ MEDIA_URL = "/authentication/media/"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+STRIPE_SECRET_KEY = "your_stripe_secret_key"
+STRIPE_PUBLISHABLE_KEY = "your_stripe_publishable_key"
